@@ -4,3 +4,6 @@ dist
 .env.local
 *.pem
 *.log
+AGENTS.md
+
+/.next
