@@ -19,7 +19,7 @@ export default function ExperienceTimeline() {
             <SectionReveal
               key={`${experience.role}-${experience.organization}`}
               delay={index * 0.06}
-              className="glass-panel grid gap-5 rounded-[1.9rem] p-5 transition duration-300 hover:-translate-y-1 lg:grid-cols-[0.3fr_0.7fr] lg:p-7"
+              className="liquid-glass grid gap-5 rounded-[1.9rem] p-5 transition duration-300 hover:-translate-y-1 lg:grid-cols-[0.3fr_0.7fr] lg:p-7"
             >
               <div>
                 <p className="text-sm font-semibold text-fuchsia-700">
@@ -31,6 +31,11 @@ export default function ExperienceTimeline() {
                 <p className="mt-2 text-violet-950/62">
                   {experience.organization}
                 </p>
+                {experience.location ? (
+                  <p className="mt-1 text-sm font-medium text-violet-950/48">
+                    {experience.location}
+                  </p>
+                ) : null}
               </div>
               <ul className="space-y-3 text-sm leading-7 text-violet-950/72 sm:text-base">
                 {experience.points.map((point) => (

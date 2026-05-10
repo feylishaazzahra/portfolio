@@ -20,7 +20,7 @@ export default function SkillsSection() {
             <SectionReveal
               key={group.title}
               delay={index * 0.05}
-              className="group relative overflow-hidden rounded-[1.75rem] border border-white/70 bg-white/58 p-5 shadow-[0_18px_60px_rgba(119,60,167,0.1)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:bg-white/76 hover:shadow-[0_24px_80px_rgba(119,60,167,0.16)]"
+              className="liquid-glass group relative overflow-hidden rounded-[1.75rem] p-5 transition duration-300 hover:-translate-y-1 hover:bg-white/76 hover:shadow-[0_24px_80px_rgba(119,60,167,0.16)]"
             >
               <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-fuchsia-200/0 blur-2xl transition group-hover:bg-fuchsia-200/50" />
               <h3 className="text-lg font-semibold text-violet-950">

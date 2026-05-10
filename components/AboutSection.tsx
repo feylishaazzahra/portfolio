@@ -17,7 +17,7 @@ export default function AboutSection() {
               (item) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-white/70 bg-white/48 p-4 text-sm font-semibold text-violet-950/72 shadow-[0_16px_44px_rgba(119,60,167,0.08)] backdrop-blur-xl"
+                  className="liquid-glass rounded-2xl p-4 text-sm font-semibold text-violet-950/72"
                 >
                   {item}
                 </div>
@@ -25,7 +25,7 @@ export default function AboutSection() {
             )}
           </div>
         </div>
-        <div className="glass-panel relative overflow-hidden rounded-[2.25rem] p-6 text-violet-950/76 sm:p-8">
+        <div className="liquid-glass-strong relative overflow-hidden rounded-[2.25rem] p-6 text-violet-950/76 sm:p-8">
           <div className="absolute right-6 top-6 h-24 w-24 rounded-full bg-lavender-300/36 blur-2xl" />
           <p className="text-lg leading-8">
             Feylisha Azzahra is an undergraduate Information Systems student at

@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Camera, Mail, Palette, Sparkles } from "lucide-react";
+import { ArrowRight, Mail, Sparkles } from "lucide-react";
 import { GlassButton } from "@/components/ui/apple-tahoe-liquid-glass-button";
 import { projects } from "@/data/projects";
 
-const projectPreviews = projects.slice(0, 4);
+const projectPreviews = [projects[0], projects[2], projects[6], projects[7]];
 
 const stats = [
   { value: "70+", label: "client orders" },
@@ -16,15 +16,27 @@ const stats = [
 
 export default function Hero() {
   const [activePreview, setActivePreview] = useState(0);
+  const [isPreviewPaused, setIsPreviewPaused] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 520, y: 220 });
   const heroRef = useRef<HTMLElement>(null);
+  const resumeTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (isPreviewPaused) return;
+
     const timer = window.setInterval(() => {
       setActivePreview((current) => (current + 1) % projectPreviews.length);
     }, 3200);
 
     return () => window.clearInterval(timer);
+  }, [isPreviewPaused]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) {
+        window.clearTimeout(resumeTimerRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -43,6 +55,27 @@ export default function Hero() {
   }, []);
 
   const activeProject = projectPreviews[activePreview];
+  const activeImage = activeProject.images[0] ?? {
+    src: activeProject.image,
+    alt: `${activeProject.title} preview`,
+    fit: "contain" as const,
+  };
+
+  const pausePreviewRotation = () => {
+    if (resumeTimerRef.current) {
+      window.clearTimeout(resumeTimerRef.current);
+    }
+    setIsPreviewPaused(true);
+  };
+
+  const resumePreviewRotation = () => {
+    if (resumeTimerRef.current) {
+      window.clearTimeout(resumeTimerRef.current);
+    }
+    resumeTimerRef.current = window.setTimeout(() => {
+      setIsPreviewPaused(false);
+    }, 1400);
+  };
 
   return (
     <section
@@ -149,33 +182,36 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-[680px]"
+          onMouseEnter={pausePreviewRotation}
+          onMouseLeave={resumePreviewRotation}
+          onFocus={pausePreviewRotation}
+          onBlur={resumePreviewRotation}
         >
           <motion.div
-            className="absolute -left-4 top-12 z-20 hidden rounded-[1.5rem] border border-white/70 bg-white/62 p-4 shadow-[0_26px_70px_rgba(126,34,206,0.18)] backdrop-blur-xl sm:block"
+            className="liquid-glass absolute -left-4 top-12 z-20 hidden rounded-[1.5rem] p-4 sm:block"
             animate={{ y: [0, -14, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <Palette className="h-6 w-6 text-fuchsia-600" aria-hidden="true" />
-            <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-violet-950/60">
-              Visual identity
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-violet-950/60">
+              11 Selected Works
+            </p>
+            <p className="mt-2 text-lg font-semibold text-violet-950">
+              Design Preview
             </p>
           </motion.div>
-          <motion.div
-            className="absolute -right-2 bottom-20 z-20 hidden rounded-full border border-white/70 bg-white/62 p-5 shadow-[0_26px_70px_rgba(147,51,234,0.18)] backdrop-blur-xl sm:block"
-            animate={{ y: [0, 16, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Camera className="h-7 w-7 text-violet-700" aria-hidden="true" />
-          </motion.div>
 
-          <div className="editorial-shadow relative rotate-[1.4deg] rounded-[2.5rem] border border-white/75 bg-white/38 p-3 backdrop-blur-2xl sm:p-5">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.85rem] bg-violet-100 sm:aspect-[5/4]">
+          <div className="liquid-glass-strong editorial-shadow relative rotate-[1.4deg] rounded-[2.5rem] p-3 sm:p-5">
+            <div
+              className={`relative aspect-[4/5] overflow-hidden rounded-[1.85rem] bg-gradient-to-br ${activeProject.palette} p-4 sm:aspect-[5/4] sm:p-6`}
+            >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.img
-                  key={activeProject.image}
-                  src={activeProject.image}
-                  alt={`${activeProject.title} preview`}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  key={activeImage.src}
+                  src={activeImage.src}
+                  alt={activeImage.alt}
+                  className={`absolute inset-0 h-full w-full p-4 ${
+                    activeImage.fit === "cover" ? "object-cover" : "object-contain"
+                  }`}
                   initial={false}
                   animate={{
                     clipPath: "inset(0 0% 0 0 round 30px)",
@@ -190,7 +226,7 @@ export default function Hero() {
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 />
               </AnimatePresence>
-              <div className="absolute inset-0 bg-gradient-to-t from-violet-950/64 via-violet-950/10 to-white/10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-violet-950/70 via-violet-950/8 to-white/12" />
               <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
                 <span className="rounded-full border border-white/40 bg-white/24 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-xl">
                   Featured preview
@@ -199,7 +235,7 @@ export default function Hero() {
                   0{activePreview + 1}
                 </span>
               </div>
-              <div className="absolute bottom-5 left-5 right-5 rounded-[1.35rem] border border-white/45 bg-white/24 p-5 text-white shadow-2xl backdrop-blur-xl sm:bottom-6 sm:left-6 sm:right-auto sm:w-80">
+              <div className="liquid-glass-dark absolute bottom-5 left-5 right-5 rounded-[1.35rem] p-5 text-white sm:bottom-6 sm:left-6 sm:right-auto sm:w-80">
                 <p className="text-sm font-semibold text-white/78">
                   {activeProject.category}
                 </p>
@@ -214,12 +250,18 @@ export default function Hero() {
                 <button
                   key={project.title}
                   type="button"
-                  onClick={() => setActivePreview(index)}
+                  onClick={() => {
+                    pausePreviewRotation();
+                    setActivePreview(index);
+                  }}
+                  onMouseEnter={pausePreviewRotation}
+                  onFocus={pausePreviewRotation}
                   className={`group relative overflow-hidden rounded-2xl border p-2 text-left shadow-sm transition hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 ${
                     activePreview === index
-                      ? "border-violet-300 bg-white/82"
-                      : "border-white/65 bg-white/50 hover:bg-white/70"
+                      ? "border-violet-300 bg-white/86 shadow-[0_18px_42px_rgba(126,34,206,0.18)]"
+                      : "border-white/65 bg-white/50 hover:bg-white/72"
                   }`}
+                  aria-pressed={activePreview === index}
                   aria-label={`Show ${project.title} preview`}
                 >
                   <span
@@ -228,7 +270,7 @@ export default function Hero() {
                   <img
                     src={project.image}
                     alt=""
-                    className="mt-3 aspect-[4/3] w-full rounded-xl object-cover"
+                    className="mt-3 aspect-[4/3] w-full rounded-xl bg-white/28 object-contain"
                     aria-hidden="true"
                   />
                   <span className="mt-2 block truncate text-xs font-semibold text-violet-950">

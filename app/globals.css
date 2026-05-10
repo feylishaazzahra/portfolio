@@ -3,6 +3,7 @@
 @source "../app/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../data/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../lib/**/*.{js,ts,jsx,tsx,mdx}";
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -42,6 +43,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -86,6 +88,72 @@ select {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.34));
     box-shadow: 0 28px 90px rgba(99, 36, 153, 0.16);
     backdrop-filter: blur(22px);
+  }
+
+  .liquid-glass {
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.66), rgba(247, 232, 255, 0.32)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(168, 85, 247, 0.1));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      inset 0 -18px 38px rgba(126, 34, 206, 0.08),
+      0 22px 70px rgba(91, 33, 182, 0.14);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  }
+
+  .liquid-glass-strong {
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(250, 245, 255, 0.44)),
+      radial-gradient(circle at 18% 8%, rgba(255, 255, 255, 0.58), transparent 34%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -24px 42px rgba(147, 51, 234, 0.1),
+      0 30px 90px rgba(91, 33, 182, 0.18);
+    backdrop-filter: blur(28px) saturate(1.28);
+    -webkit-backdrop-filter: blur(28px) saturate(1.28);
+  }
+
+  .liquid-glass-dark {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(216, 180, 254, 0.1)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(76, 29, 149, 0.12));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      inset 0 -18px 36px rgba(255, 255, 255, 0.05),
+      0 20px 70px rgba(30, 8, 72, 0.28);
+    backdrop-filter: blur(24px) saturate(1.28);
+    -webkit-backdrop-filter: blur(24px) saturate(1.28);
+  }
+
+  .glass-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(168, 85, 247, 0.42) rgba(255, 255, 255, 0.22);
+  }
+
+  .glass-scrollbar::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .glass-scrollbar::-webkit-scrollbar-track {
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .glass-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(192, 132, 252, 0.65), rgba(217, 70, 239, 0.55));
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 
   .editorial-shadow {

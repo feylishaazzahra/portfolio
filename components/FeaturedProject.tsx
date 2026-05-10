@@ -22,17 +22,19 @@ const highlights = [
 ];
 
 export default function FeaturedProject() {
+  const previewImages = featuredProject.images.slice(0, 4);
+
   return (
     <section className="px-5 py-24 sm:px-8 lg:px-12">
-      <SectionReveal className="glass-panel mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-[2.5rem] p-5 lg:grid-cols-[0.95fr_1.05fr] lg:p-8">
+      <SectionReveal className="liquid-glass-strong mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-[2.5rem] p-5 lg:grid-cols-[0.95fr_1.05fr] lg:p-8">
         <div className="relative min-h-[420px] overflow-hidden rounded-[1.9rem] bg-gradient-to-br from-cyan-100 via-violet-100 to-fuchsia-100 p-5">
           <div className="absolute right-6 top-6 h-24 w-24 rounded-full bg-white/50 blur-2xl" />
           <img
             src={featuredProject.image}
             alt={`${featuredProject.title} project preview`}
-            className="h-full min-h-[380px] w-full rounded-[1.35rem] object-cover shadow-[0_24px_70px_rgba(76,29,149,0.2)]"
+            className="h-full min-h-[380px] w-full rounded-[1.35rem] bg-white/38 object-contain p-5 shadow-[0_24px_70px_rgba(76,29,149,0.2)]"
           />
-          <div className="absolute bottom-8 left-8 right-8 rounded-[1.25rem] border border-white/45 bg-white/34 p-4 text-violet-950 shadow-2xl backdrop-blur-xl">
+          <div className="liquid-glass absolute bottom-8 left-8 right-8 rounded-[1.25rem] p-4 text-violet-950">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-fuchsia-700">
               Featured Case Study
             </p>
@@ -68,6 +70,21 @@ export default function FeaturedProject() {
                 </div>
               );
             })}
+          </div>
+
+          <div className="mt-5 grid grid-cols-4 gap-3">
+            {previewImages.map((image) => (
+              <div
+                key={image.src}
+                className="liquid-glass grid aspect-square place-items-center rounded-2xl p-2"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </SectionReveal>

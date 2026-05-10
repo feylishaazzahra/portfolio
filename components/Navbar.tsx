@@ -9,7 +9,7 @@ const navItems = [
 export default function Navbar() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 px-4 pt-4 sm:px-8">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/70 bg-white/55 px-4 py-3 shadow-[0_18px_60px_rgba(119,60,167,0.14)] backdrop-blur-2xl">
+      <nav className="liquid-glass mx-auto flex max-w-7xl items-center justify-between rounded-full px-4 py-3">
         <a
           href="#home"
           className="text-sm font-semibold tracking-[0.22em] text-violet-950"
@@ -29,7 +29,7 @@ export default function Navbar() {
         </div>
         <a
           href="mailto:azzahrafeylisha@gmail.com"
-          className="rounded-full bg-violet-950 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-900/20 transition hover:bg-violet-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
+          className="rounded-full border border-white/70 bg-lavender-300/42 px-4 py-2 text-sm font-semibold text-violet-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.82),0_14px_36px_rgba(126,34,206,0.16)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-lavender-200/62 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
         >
           Hire Me
         </a>
