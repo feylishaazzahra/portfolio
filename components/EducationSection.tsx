@@ -9,7 +9,7 @@ export default function EducationSection() {
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-fuchsia-200">
-              Educationnnnnnnn
+              Education
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-normal sm:text-5xl">
               Bachelor of Information System
